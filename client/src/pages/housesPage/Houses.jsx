@@ -14,8 +14,8 @@ export default function Houses() {
         if (housesData) {
           setHouses(housesData)
         }
-        const picture = await getHouseAllImages()
-        setHousePictures(picture)
+        const pictures = await getHouseAllImages()
+        setHousePictures(pictures)
       } catch (e) {
         console.log(e);
       }

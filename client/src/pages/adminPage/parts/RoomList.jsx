@@ -5,7 +5,9 @@ import RoomItem from "./RoomItem";
 import { getHouse } from "../../../api/housesApi";
 
 export default function RoomList({
+  handleEdit,
   selectedHouseId,
+  handleSelectRoom,
   handleSelectHouse,
   roomFormData,
   onChange,
@@ -14,7 +16,7 @@ export default function RoomList({
   onToggleRoomForm,
 }) {
   const [rooms, setRooms] = useState([]);
-  const [editingRoom, setEditingRoom] = useState(null);
+  // const [editingRoom, setEditingRoom] = useState(null);
   const [currentHouse, setCurrentHouse] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -38,10 +40,10 @@ export default function RoomList({
     fetchHouseAndRooms();
   }, [selectedHouseId]);
 
-  const handleEditRoom = (room) => {
-    setEditingRoom(room);
-    onToggleRoomForm();
-  };
+  // const handleEditRoom = (room) => {
+  //   setEditingRoom(room);
+  //   onToggleRoomForm(true);
+  // };
 
   const handleDeleteRoom = async (id, name) => {
     await deleteRoom(id, name);
@@ -72,20 +74,22 @@ export default function RoomList({
             <AddRoomForm
               houseName={currentHouse.name}
               selectedHouseId={selectedHouseId}
-              roomFormData={editingRoom || roomFormData}
+              roomFormData={roomFormData}
               onChange={onChange}
             />
           ) : (
             <div className="houses__list">
               <div className="houses__list-top">
                 <p>Список Комнат "{currentHouse.name}"</p>
-                <button onClick={() => handleEditRoom(rooms)} className="houses__list-add">
+                <button onClick={onToggleRoomForm} className="houses__list-add">
                   Добавить
                 </button>
               </div>
               {rooms.length === 0 ? <div>Список комнат пуст</div> : rooms.map(room => (
                 <RoomItem
-                  handleEdit={handleEditRoom}
+                  houseId={selectedHouseId}
+                  handleSelectRoom={handleSelectRoom}
+                  handleEdit={handleEdit}
                   key={room.id}
                   room={room}
                   onDelete={() => handleDeleteRoom(room.id)}

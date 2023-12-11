@@ -18,9 +18,9 @@ export default function MainRoutes() {
         <Route index element={<Home />} />
         <Route path="houses" element={<Houses />} />
         <Route path="houses/:houseId" element={<House />} />
-        <Route path="houses/:houseId/rooms" element={<Rooms />} />
-        <Route path="apartaments" element={<Aparts />} />
-        <Route path="apartaments/:apartId" element={<Apartament />} />
+        <Route path="houses/:houseId/rooms/:roomId" element={<Rooms />} />
+        <Route path="apartments" element={<Aparts />} />
+        <Route path="apartments/:apartId" element={<Apartament />} />
         <Route path="reservation" element={<Reserve />} />
         <Route path="admin" element={<Admin />} />
         <Route path="login" element={<Login />} />

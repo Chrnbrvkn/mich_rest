@@ -5,7 +5,7 @@ import EditApart from "./EditApart"
 import EditHouse from "./EditHouse"
 import EditRoom from "./EditRoom"
 
-export default function EditForm({ type, id, onEditSubmit }) {
+export default function EditForm({ type, id, houseId, onEditSubmit }) {
 
   const renderEditForm = () => {
     switch (type) {
@@ -19,7 +19,7 @@ export default function EditForm({ type, id, onEditSubmit }) {
         )
       case 'room':
         return (
-          <EditRoom id={id} onEditSubmit={onEditSubmit}/>
+          <EditRoom roomId={id} houseId={houseId} onEditSubmit={onEditSubmit}/>
         )
       default:
         <p>Unknown type!</p>

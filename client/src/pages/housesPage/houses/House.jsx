@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getHouseImages, getHouse } from '../../../api/housesApi';
-import { getRoomAllImages, getRooms } from '../../../api/roomsApi';
+import { getRoomAllImages, getRoomOneImage, getRooms } from '../../../api/roomsApi';
 import altPicture from '/src/assets/images/homeCards/home-1.png'
 import { NavLink } from "react-router-dom";
 import '../../../assets/styles/pagesStyles/house.css'
@@ -28,8 +28,9 @@ import ironIcon from '../../../assets/images/icons/houses-icons/iron.svg'
 import grillIcon from '../../../assets/images/icons/houses-icons/grill.svg'
 import refrigeratorIcon from '../../../assets/images/icons/houses-icons/refrigerator.svg'
 import laundryIcon from '../../../assets/images/icons/houses-icons/laundry.svg'
-
+import bedIcon from '../../../assets/images/icons/houses-icons/beddouble.svg'
 import humanIcon from '../../../assets/images/icons/houses-icons/man.svg'
+import tapIcon from '../../../assets/images/icons/houses-icons/capcap.svg'
 
 
 export default function House() {
@@ -39,32 +40,7 @@ export default function House() {
   const [housePictures, setHousePictures] = useState([])
   const [roomsPictures, setRoomsPictures] = useState([])
 
-  house.services = [
-    { name: 'Wi-Fi', icon: wifiIcon },
-    { name: 'Фен', icon: hairdryerIcon },
-    { name: 'Бассейн', icon: poolIcon },
-    { name: 'Детская кроватка', icon: cribIcon },
-    { name: 'Двор', icon: courtyardIcon },
-    { name: 'Посудомоечная машина', icon: dishwasherIcon },
-    { name: 'Стирка', icon: washingIcon },
-    { name: 'Столовая', icon: diningIcon },
-    { name: 'Парковка', icon: parkingIcon },
-    { name: 'Уборка', icon: cleaningIcon },
-    { name: 'Смена постели', icon: bedchangeIcon },
-    { name: 'Кухня', icon: kitchenIcon },
-    { name: 'Утюг', icon: ironIcon },
-    { name: 'Гриль', icon: grillIcon },
-    { name: 'Холодильник', icon: refrigeratorIcon },
-    { name: 'Прачечная', icon: laundryIcon }
-  ]
-  const renderServices = (services) => {
-    return services.map((service, index) => (
-      <div key={index} className='house__services-item'>
-        <img src={service.icon} alt={service.name} />
-        <p>{service.name}</p>
-      </div>
-    ))
-  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -87,7 +63,39 @@ export default function House() {
     }
     fetchData()
   }, []);
+  
+  house.services = [
+    { name: 'Wi-Fi', icon: wifiIcon },
+    { name: 'Фен', icon: hairdryerIcon },
+    { name: 'Бассейн', icon: poolIcon },
+    { name: 'Детская кроватка', icon: cribIcon },
+    { name: 'Двор', icon: courtyardIcon },
+    { name: 'Посудомоечная машина', icon: dishwasherIcon },
+    { name: 'Стирка', icon: washingIcon },
+    { name: 'Столовая', icon: diningIcon },
+    { name: 'Парковка', icon: parkingIcon },
+    { name: 'Уборка', icon: cleaningIcon },
+    { name: 'Смена постели', icon: bedchangeIcon },
+    { name: 'Кухня', icon: kitchenIcon },
+    { name: 'Утюг', icon: ironIcon },
+    { name: 'Гриль', icon: grillIcon },
+    { name: 'Холодильник', icon: refrigeratorIcon },
+    { name: 'Прачечная', icon: laundryIcon }
+  ]
 
+  const renderServices = (services) => {
+    return services.map((service, index) => (
+      <div key={index} className='house__services-item'>
+        <img src={service.icon} alt={service.name} />
+        <p>{service.name}</p>
+      </div>
+    ))
+  }
+
+  const handleRoomImage = (roomId) => {
+    const pic = roomsPictures.find((pic) => pic.roomId === roomId)
+    return pic ? `http://localhost:3000${pic.url}` : altPicture
+  }
 
   return (
     <section className='house'>
@@ -201,6 +209,7 @@ export default function House() {
           {house.description_4}
         </p>
       </div>
+      {/* изменить названия классов с apart на room */}
       <div className="apart__list">
         <ul className="apart__list-items">
           {rooms.map((room, index) => (
@@ -213,6 +222,51 @@ export default function House() {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="apart">
+        <h2 className="apart__items-title">
+          НОМЕРА
+        </h2>
+        <div className="apart__items">
+          {rooms.map(room => (
+            <div key={room.id} className="apart__item">
+              <div className="apart__item-content">
+                <h6>{room.name}</h6>
+                <img className="apart__item-img" src={handleRoomImage(room.id)} alt={room.name} />
+                <div className="apart__item-icons">
+                  <div className="apart__item-icon">
+                    <img src={bedIcon} alt="" />
+                    {room.roomCount < 2 ? (
+                      <p>{`${room.roomCount} спальное место`}</p>
+                    ) : (
+                      <p>{`${room.roomCount} спальных места`}</p>
+                    )}
+                  </div>
+                  <div className="apart__item-icon">
+                    <img src={wifiIcon} alt="" />
+                    <p>Интернет</p>
+                  </div>
+                  <div className="apart__item-icon">
+                    <img src={refrigeratorIcon} alt="" />
+                    <p>Холодильник</p>
+                  </div>
+                  <div className="apart__item-icon">
+                    <img src={tapIcon} alt="" />
+                    <p>Санузел</p>
+                  </div>
+                </div>
+                {Array.from({ length: room.roomCount}, (_, index) => (
+                <div key={index} className="apart__item-man"><img src={humanIcon} alt="" /></div>
+                ))}
+                <div className="apart__item-buttons">
+                  <NavLink to={`/houses/${houseId}/rooms/${room.id}`} className='apart__item-btn--left' >Подробнее</NavLink>
+                  <a className='apart__item-btn--right' href="#">Забронировать</a>
+                </div>
+              </div>
+            </div>
+          ))
+          }
+        </div>
       </div>
     </section>
     // <div className="hous">

@@ -1,21 +1,24 @@
 import { useForm } from "react-hook-form";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { getRoom, updateRoom, getRoomImages, uploadRoomPictures, deleteRoomPicture } from "../../../api/roomsApi";
-import { roomFields } from "../../../constants/formFields.js"; 
+import { roomFields } from "../../../constants/formFields.js";
 
 
-export default function EditRoom({ roomId, houseId, onEditSubmit }) {
+export default function EditRoom({ houseId, roomId, onEditSubmit }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
   const [pictures, setPictures] = useState([]);
   const [existingPictures, setExistingPictures] = useState([]);
   const picturesInput = useRef();
   const [roomName, setRoomName] = useState('');
 
+  console.log(`ROOM: ${roomId} -- HOUSE ${houseId}`);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const roomData = await getRoom(roomId, houseId);
         if (roomData) {
+          console.log(roomData);
           setRoomName(roomData.name);
           Object.keys(roomData).forEach(key => {
             setValue(key, roomData[key]);

@@ -18,10 +18,15 @@ export default function Admin() {
   const [editId, setEditId] = useState(null)
   const [editType, setEditType] = useState('')
   const [selectedHouseId, setSelcectedHouseId] = useState(null)
+  const [selectedRoomId, setSelcectedRoomId] = useState(null)
 
   const handleSelectHouse = (id) => {
     setSelcectedHouseId(id)
     console.log("Выбран дом с ID:", id);
+  }
+  const handleSelectRoom = (id) => {
+    setSelcectedRoomId(id)
+    console.log("Выбрана комната с ID:", id);
   }
 
   const handleSelectedTable = (table) => {
@@ -31,29 +36,27 @@ export default function Admin() {
     setShowApartForm(false);
     setContent('list');
     setSelcectedHouseId(null)
+    setSelcectedRoomId(null)
   }
 
-  const handleEdit = (id, type) => {
+  const handleEdit = (id, type, houseId) => {
     setEditId(id)
+    setSelcectedHouseId(houseId)
     setContent('edit')
     setEditType(type)
   }
 
   const handleEditSubmit = () => {
+    console.log(editType);
     setContent('list');
-    fetchAparts();
-  };
-  const renderContent = () => {
-    switch (content) {
-      case 'edit':
-        return <EditForm id={editId} onEditSubmit={handleEditSubmit} type={editType} />;
-      case 'list':
-      default:
-        return (
-          <>{tableComponents[selectedTable]}</>
-        )
+    if (editType === 'apart') {
+      fetchAparts();
+    } else if (editType === 'house') {
+      fetchHouses();
+    } else if (editType === 'room') {
+      fetchHouses();
     }
-  }
+  };
 
   const [houses, setHouses] = useState([])
   const [houseFormData, setHouseFormData] = useState({})
@@ -79,10 +82,6 @@ export default function Admin() {
     }
   }, []);
 
-  useEffect(() => {
-    fetchHouses();
-  }, [fetchHouses]);
-
   const fetchAparts = useCallback(async () => {
     try {
       const fetchedAparts = await getAparts();
@@ -91,11 +90,10 @@ export default function Admin() {
       console.error(error);
     }
   }, []);
-
   useEffect(() => {
+    fetchHouses();
     fetchAparts();
-  }, [fetchAparts]);
-  // console.log(aparts);
+  }, [fetchHouses, fetchAparts]);
 
 
   const tableComponents = {
@@ -118,8 +116,10 @@ export default function Admin() {
       onToggleApartForm={() => setShowApartForm(prev => !prev)}
     />,
     rooms: <RoomList
+      handleEdit={handleEdit}
       selectedHouseId={selectedHouseId}
       handleSelectHouse={handleSelectHouse}
+      handleSelectRoom={handleSelectRoom}
       roomFormData={roomFormData}
       onChange={handleRoomFormChange}
       houses={houses}
@@ -127,6 +127,18 @@ export default function Admin() {
       onToggleRoomForm={() => setShowRoomForm(prev => !prev)}
     />,
   };
+
+  const renderContent = () => {
+    switch (content) {
+      case 'edit':
+        return <EditForm type={editType} id={editId} houseId={selectedHouseId} onEditSubmit={handleEditSubmit} />;
+      case 'list':
+      default:
+        return (
+          <>{tableComponents[selectedTable]}</>
+        )
+    }
+  }
 
   return (
     <>

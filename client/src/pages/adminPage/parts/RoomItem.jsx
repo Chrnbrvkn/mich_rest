@@ -1,14 +1,16 @@
 
 export default function RoomItem({
+  houseId,
+  handleSelectRoom,
   handleEdit,
   room,
   onDelete,
 }) {
   const TYPE = 'room'
   const handleClickEdit = () => {
-    handleEdit(room.id, TYPE)
+    handleSelectRoom(room.id)
+    handleEdit(room.id, TYPE, houseId)
   }
-
   return (
     <div key={room.id}>
       <a className="houses__list-item">

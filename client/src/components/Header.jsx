@@ -21,7 +21,7 @@ function Header() {
                             <NavLink className='header__menu-link' to="/houses">Дома</NavLink>
                         </li>
                         <li className="header__menu-item">
-                            <NavLink className='header__menu-link' to="/apartaments">Квартиры</NavLink>
+                            <NavLink className='header__menu-link' to="/apartments">Квартиры</NavLink>
                         </li>
                         <li className="header__menu-item">
                             <NavLink className='header__menu-link' to="/reservation">Бронирование</NavLink>
