@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react"
-import { createHouse, uploadHousePictures } from "../housesApi"
 import { useForm } from 'react-hook-form'
-import { houseFields } from "../formFields"
+import { createHouse, uploadHousePictures } from "../../../api/housesApi"
+import { houseFields } from "../../../constants/formFields"
 
 export default function AddHouseForm({ houseFormData, onChange, onHouseAdded }) {
   const { register, handleSubmit, watch, setValue, formState: { errors }, reset } = useForm()

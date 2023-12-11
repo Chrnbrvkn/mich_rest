@@ -1,10 +1,10 @@
-.hous{
+.house{
   padding-top: 40px;
 }
 .house__description + .house__description{
   margin-top: 10px;
 }
-.hous h2{
+.house h2{
   font-size: 55px;
   line-height: 67px;
   text-align: center;

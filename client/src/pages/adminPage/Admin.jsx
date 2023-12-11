@@ -3,9 +3,9 @@ import ApartList from "./parts/ApartList"
 import HouseList from "./parts/HouseList"
 import RoomList from "./parts/RoomList"
 import EditForm from './parts/EditForm'
-import { getHouses, deleteHouse } from "./housesApi"
-import { getAparts, deleteApart } from "./apartsApi"
-import { getRooms, deleteRoom } from "./roomsApi"
+import { getHouses, deleteHouse } from "../../api/housesApi"
+import { getAparts, deleteApart } from "../../api/apartsApi"
+import { getRooms, deleteRoom } from "../../api/roomsApi"
 import './admin.css'
 
 export default function Admin() {

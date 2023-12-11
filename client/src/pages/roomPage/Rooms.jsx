@@ -1,9 +1,9 @@
-import '../../../public/assets/styles/pagesStyles/room.css'
-import door from '../../../public/assets/images/room/room-icons/door.svg'
-import occupied from '../../../public/assets/images/room/room-icons/occupied.svg'
-import stairs from '../../../public/assets/images/room/room-icons/stairs.svg'
-import faucet from '../../../public/assets/images/room/room-icons/faucet.svg'
-import food from '../../../public/assets/images/room/room-icons/food.svg'
+import '../../assets/styles/pagesStyles/room.css'
+import door from '../../assets/images/room/room-icons/door.svg'
+import occupied from '../../assets/images/room/room-icons/occupied.svg'
+import stairs from '../../assets/images/room/room-icons/stairs.svg'
+import faucet from '../../assets/images/room/room-icons/faucet.svg'
+import food from '../../assets/images/room/room-icons/food.svg'
 export default function Rooms() {
 
   return (

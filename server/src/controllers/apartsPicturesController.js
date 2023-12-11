@@ -3,6 +3,11 @@ const fs = require('fs');
 const path = require('path');
 
 class ApartsPicturesController {
+  
+  async getAllPictures(req, res){
+    const allPictures = await ApartsPictures.findAll()
+    return res.json(allPictures)
+  }
 
   async getPictures(req, res) {
     const { apartId } = req.params;
@@ -13,6 +18,7 @@ class ApartsPicturesController {
       if (pictures.length === 0) {
         return res.json([]);
       }
+
       return res.json(pictures);
     } catch (e) {
       console.error(e);
@@ -29,9 +35,8 @@ class ApartsPicturesController {
           apartId: apartId
         }
       });
-      console.log(picture);
       if (!picture) {
-        return [];
+        return res.status(404).json({ error: 'Picture not found' });
       }
       return res.json(picture);
     } catch (e) {
@@ -49,7 +54,7 @@ class ApartsPicturesController {
 
       const pictureUrls = [];
       for (const file of req.files) {
-        const tempUrl = '/uploads/apartsPictures/' + file.filename;
+        const tempUrl = '/public/uploads/apartsPictures/' + file.filename;
         const picture = await ApartsPictures.create({ url: tempUrl, apartId: apartId });
         pictureUrls.push(picture.url);
       }
@@ -64,24 +69,23 @@ class ApartsPicturesController {
   async deletePicture(req, res) {
     const { apartId, imageId } = req.params;
     try {
+      if (!imageId) {
+        return res.status(400).json({ error: 'ID not specified' })
+      }
       const picture = await ApartsPictures.findByPk(imageId);
       if (!picture || picture.apartId !== parseInt(apartId, 10)) {
         return res.status(404).json({ error: 'Picture not found' });
       }
 
-      const filePath = path.join(__dirname, '..', picture.url);
+      const filePath = path.join(__dirname, '..', '..', picture.url);
       await picture.destroy();
 
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Error deleting file:", err);
-          return res.status(500).json({ error: 'Failed to delete the file' });
-        }
-        return res.json({ message: 'Picture deleted successfully' });
-      });
+      await fs.promises.unlink(filePath);
+      res.json({ message: 'Picture deleted successfully' });
     } catch (e) {
       console.error(e);
-      res.status(500).json({ error: 'Internal Server Error' });
+      console.error("Error deleting file:", e);
+      res.status(500).json({ error: 'Failed to delete the file' });
     }
   }
 }

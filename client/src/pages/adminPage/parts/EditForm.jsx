@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react"
-import { createApart, uploadApartPictures } from "../apartsApi"
+import { createApart, uploadApartPictures } from "../../../api/apartsApi"
 import { useForm } from "react-hook-form"
 import EditApart from "./EditApart"
 import EditHouse from "./EditHouse"

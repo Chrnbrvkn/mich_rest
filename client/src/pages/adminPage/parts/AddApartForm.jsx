@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react"
-import { createApart, uploadApartPictures } from "../apartsApi"
+import { createApart, uploadApartPictures } from "../../../api/apartsApi.js"
 import { useForm } from "react-hook-form"
-import { apartFields } from "../formFields"
+import { apartFields } from "../../../constants/formFields.js"
 
 export default function AddApartForm({ apartFormData, onChange, onApartAdded }) {
   const { register, handleSubmit, watch, setValue, formState: { errors }, reset } = useForm()

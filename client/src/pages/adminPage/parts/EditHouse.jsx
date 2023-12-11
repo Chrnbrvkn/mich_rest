@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { getHouse, updateHouse, getHouseImages, uploadHousePictures, deleteHousePicture } from "../housesApi";
-import { houseFields } from "../formFields"; // Аналогично apartFields, но для свойств дома
+import { getHouse, updateHouse, getHouseImages, uploadHousePictures, deleteHousePicture } from "../../../api/housesApi";
+import { houseFields } from "../../../constants/formFields"; 
 
 export default function EditHouse({ id, onEditSubmit }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
@@ -73,19 +73,6 @@ export default function EditHouse({ id, onEditSubmit }) {
         newHouseData.append(key, value);
       });
 
-      // ----------------------------------->
-
-
-      // const formData = new FormData()
-      // pictures.map((picture) => {
-      //   formData.append(`housesPictures`, picture)
-      // })
-      // formData.append('houseId', houseId)
-
-      // await axios.post(`http://localhost:3000/api/house/${houseId}/pictures`, formData)
-
-
-      // ----------------------------->
       await updateHouse(id, newHouseData);
       if (pictures.length > 0) {
         await uploadHousePictures(pictures, id);

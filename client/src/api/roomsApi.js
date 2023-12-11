@@ -47,7 +47,14 @@ export const deleteRoom = async (houseId, roomId) => {
     console.error(e);
   }
 }
-
+export const getRoomAllImages = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/api/room/pictures`)
+    return response.data
+  } catch (e) {
+    console.error(e);
+  }
+}
 export const getRoomImages = async (roomId) => {
   try {
     const response = await axios.get(`http://localhost:3000/api/room/${roomId}/pictures`)

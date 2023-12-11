@@ -1,8 +1,8 @@
 import { useState, useRef, useCallback, useEffect } from "react"
-import { createRoom, uploadRoomPictures } from "../roomsApi"
+import { createRoom, uploadRoomPictures } from "../../../api/roomsApi"
 import { useForm } from 'react-hook-form';
 import '../admin.css'
-import { roomFields } from "../formFields";
+import { roomFields } from "../../../constants/formFields";
 
 export default function AddRoomForm({ houseName,selectedHouseId, roomFormData, onChange, onRoomAdded }) {
   const { register, handleSubmit, watch, setValue, formState: { errors }, reset } = useForm();
@@ -12,24 +12,24 @@ export default function AddRoomForm({ houseName,selectedHouseId, roomFormData, o
   const picturesInput = useRef()
 
   // Функция для сохранения данных формы в sessionStorage
-  // const saveFormData = (data) => {
-  //   sessionStorage.setItem('roomFormData', JSON.stringify(data))
-  // }
-  // // Отслеживание изменений в полях формы и сохранение их в sessionStorage
-  // useEffect(() => {
-  //   const sub = watch(data => saveFormData(data))
-  //   return () => sub.unsubscribe()
-  // }, [onChange, watch])
-  // // Загрузка сохраненных данных формы при монтировании компонента
-  // useEffect(() => {
-  //   const savedForm = sessionStorage.getItem('roomFormData')
-  //   if (roomFormData) {
-  //     const formData = JSON.parse(savedForm)
-  //     for (const key in formData) {
-  //       setValue(key, formData[key])
-  //     }
-  //   }
-  // }, [setValue])
+  const saveFormData = (data) => {
+    sessionStorage.setItem('roomFormData', JSON.stringify(data))
+  }
+  // Отслеживание изменений в полях формы и сохранение их в sessionStorage
+  useEffect(() => {
+    const sub = watch(data => saveFormData(data))
+    return () => sub.unsubscribe()
+  }, [onChange, watch])
+  // Загрузка сохраненных данных формы при монтировании компонента
+  useEffect(() => {
+    const savedForm = sessionStorage.getItem('roomFormData')
+    if (roomFormData) {
+      const formData = JSON.parse(savedForm)
+      for (const key in formData) {
+        setValue(key, formData[key])
+      }
+    }
+  }, [setValue])
 
   const handleImageChange = useCallback((e) => {
     const files = Array.from(e.target.files);
@@ -59,7 +59,7 @@ export default function AddRoomForm({ houseName,selectedHouseId, roomFormData, o
       if (picturesInput.current) {
         picturesInput.current.value = null
       }
-      onRoomAdded()
+      // onRoomAdded()
     } catch (e) {
       console.log(e);
     }

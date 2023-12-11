@@ -51,6 +51,15 @@ export const deleteApart = async (apartId, name) => {
   }
 }
 
+export const getApartAllImages = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/api/apart/pictures`)
+    return response.data
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export const getApartImages = async (apartId) => {
   try {
     const response = await axios.get(`http://localhost:3000/api/apart/${apartId}/pictures`)

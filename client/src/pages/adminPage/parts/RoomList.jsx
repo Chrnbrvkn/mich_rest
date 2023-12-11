@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getRooms, deleteRoom } from "../roomsApi";
+import { getRooms, deleteRoom } from "../../../api/roomsApi";
 import AddRoomForm from "./AddRoomForm";
 import RoomItem from "./RoomItem";
-import { getHouse } from "../housesApi";
+import { getHouse } from "../../../api/housesApi";
 
 export default function RoomList({
   selectedHouseId,

@@ -7,7 +7,8 @@ const path = require('path')
 const PORT = process.env.PORT || 8080
 const app = express()
 
-app.use('/uploads', express.static('uploads'));
+app.use('/public/uploads', express.static('public/uploads'));
+
 app.use(cors({
   origin: 'http://localhost:5173'
 }))

@@ -1,4 +1,4 @@
-import '../../../public/assets/styles/pagesStyles/home.css'
+import '../../assets/styles/pagesStyles/home.css'
 import BottomBtn from './parts/BottomBtn'
 import CenterBtns from './parts/CenterBtns'
 import Entertainment from './parts/Entertainment'

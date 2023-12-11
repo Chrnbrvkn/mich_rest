@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getAparts, deleteApart } from "../apartsApi"
+import { getAparts, deleteApart } from "../../../api/apartsApi"
 import AddApartForm from "./AddApartForm"
 import ApartItem from './ApartItem'
 

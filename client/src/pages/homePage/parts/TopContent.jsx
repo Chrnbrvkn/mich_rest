@@ -1,3 +1,4 @@
+import logo from '/src/assets/images/imageHome/other/home-logo-1.png'
 
 export default function TopContent(){
 
@@ -6,7 +7,7 @@ export default function TopContent(){
       <div className="top__content">
         <div className="container">
           <a className="top__logo" href="#">
-            <img className="top_logo-img" src="../../../../public/assets/images/imageHome/other/home-logo-1.png" alt="" />
+            <img className="top_logo-img" src={logo} alt="" />
           </a>
           <div className="top__content-buttons">
             <a href="#" className="top__content-button-1">

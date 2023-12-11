@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getHouses, deleteHouse } from "../housesApi";
+import { getHouses, deleteHouse } from "../../../api/housesApi";
 import AddHouseForm from "./AddHouseForm";
 import HouseItem from "./HouseItem";
 

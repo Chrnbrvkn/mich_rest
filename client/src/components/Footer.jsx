@@ -1,11 +1,14 @@
-import '../../public/assets/styles/footer.css'
+import '../assets/styles/footer.css'
+import logo from '/src/assets/images/icons/logo.png'
+import vk from '/src/assets/images/icons/vk.svg'
+import tg from '/src/assets/images/icons/tel.svg'
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer__content">
           <a className="footer__logo">
-            <img className="footer__logo-img" href="#" src="../../public/assets/images/icons/logo.png" />
+            <img className="footer__logo-img" href="#" src={logo} />
           </a>
           <h2 className='footer__title'>
             Михаил ждет Вас в гости!
@@ -18,11 +21,11 @@ export default function Footer() {
                 +7 (937) 667 20-21
               </a>
               <a className='footer__general-item' href='#'>
-                <img className="footer__socital-vk" src="../../public/assets/images/icons/vk.svg" /><p className='footer_general-text--max'>vk.com/gelmisa</p>
+                <img className="footer__socital-vk" src={vk} /><p className='footer_general-text--max'>vk.com/gelmisa</p>
                 <p className='footer_general-text--min'>Вконтакте</p>
               </a>
               <a className='footer__general-item' href='#'>
-                <img className="footer__socital-vk" src="../../public/assets/images/icons/tel.svg" /><p className='footer_general-text--max'>t.me/gelendzhik_travel_mihail</p>
+                <img className="footer__socital-vk" src={tg} /><p className='footer_general-text--max'>t.me/gelendzhik_travel_mihail</p>
                 <p className='footer_general-text--min'>Telegram</p>
               </a>
             </div>

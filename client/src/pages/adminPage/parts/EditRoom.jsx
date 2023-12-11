@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { getRoom, updateRoom, getRoomImages, uploadRoomPictures, deleteRoomPicture } from "../roomsApi";
-import { roomFields } from "../formFields"; // Поля формы для комнаты
+import { getRoom, updateRoom, getRoomImages, uploadRoomPictures, deleteRoomPicture } from "../../../api/roomsApi";
+import { roomFields } from "../../../constants/formFields.js"; 
+
 
 export default function EditRoom({ roomId, houseId, onEditSubmit }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
@@ -10,33 +11,25 @@ export default function EditRoom({ roomId, houseId, onEditSubmit }) {
   const picturesInput = useRef();
   const [roomName, setRoomName] = useState('');
 
-  const fetchRoomData = useCallback(async () => {
-    try {
-      const roomData = await getRoom(roomId, houseId);
-      if (roomData) {
-        setRoomName(roomData.name);
-        Object.keys(roomData).forEach(key => {
-          setValue(key, roomData[key]);
-        });
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [roomId, houseId, setValue]);
-
-  const fetchRoomImages = async () => {
-    try {
-      const existingPictures = await getRoomImages(roomId);
-      setExistingPictures(existingPictures);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   useEffect(() => {
-    fetchRoomData();
-    fetchRoomImages();
-  }, [fetchRoomData]);
+    const fetchData = async () => {
+      try {
+        const roomData = await getRoom(roomId, houseId);
+        if (roomData) {
+          setRoomName(roomData.name);
+          Object.keys(roomData).forEach(key => {
+            setValue(key, roomData[key]);
+          });
+        }
+        const existingPictures = await getRoomImages(roomId);
+        setExistingPictures(existingPictures);
+
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, [roomId, houseId, setValue]);
 
   const handleDeleteImage = async (imageId) => {
     try {
@@ -60,7 +53,7 @@ export default function EditRoom({ roomId, houseId, onEditSubmit }) {
 
   const handleImageChange = useCallback((e) => {
     const files = Array.from(e.target.files);
-    if(files){
+    if (files) {
       setPictures(files);
     }
   }, []);
@@ -73,7 +66,7 @@ export default function EditRoom({ roomId, houseId, onEditSubmit }) {
       });
 
       await updateRoom(houseId, roomId, newRoomData);
-      if(pictures.length > 0){
+      if (pictures.length > 0) {
         await uploadRoomPictures(pictures, roomId);
       }
       console.log(`${data.name} updated!`);

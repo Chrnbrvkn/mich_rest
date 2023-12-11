@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const getHouses = async () => {
   try {
     const response = await axios.get("http://localhost:3000/api/houses")
@@ -49,6 +50,15 @@ export const deleteHouse = async (houseId, name) => {
   try {
     await axios.delete(`http://localhost:3000/api/houses/${houseId}`)
     return console.log(`${name} был удалён!`)
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export const getHouseAllImages = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/api/house/pictures`)
+    return response.data
   } catch (e) {
     console.error(e);
   }

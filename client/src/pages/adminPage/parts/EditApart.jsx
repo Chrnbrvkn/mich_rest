@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import { useState, useRef, useCallback, useEffect } from "react"
-import { uploadApartPictures, getApart, updateApart, getApartImages, deleteApartPicture } from "../apartsApi"
-import { apartFields } from "../formFields"
+import { uploadApartPictures, getApart, updateApart, getApartImages, deleteApartPicture } from "../../../api/apartsApi"
+import { apartFields } from "../../../constants/formFields"
 
 
 export default function EditApart({ id, onEditSubmit }) {
@@ -81,7 +81,7 @@ export default function EditApart({ id, onEditSubmit }) {
       reset()
       setPictures([])
       if (picturesInput.current) {
-        pictures.current.value = null
+        picturesInput.current.value = null
       }
       onEditSubmit()
     } catch (e) {
