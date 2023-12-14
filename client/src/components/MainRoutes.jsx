@@ -12,8 +12,6 @@ import Aparts from '../pages/apartsPage/Aparts';
 import Apartament from '../pages/apartsPage/Apartment';
 
 export default function MainRoutes() {
-
-
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -24,7 +22,6 @@ export default function MainRoutes() {
         <Route path="apartments" element={<Aparts />} />
         <Route path="apartments/:apartId" element={<Apartament />} />
         <Route path="reservation" element={<Reserve />} />
-        <Route path="reservation/:type/:itemId" element={<Reserve />} />
         <Route path="admin" element={<Admin />} />
         <Route path="login" element={<Login />} />
       </Route>

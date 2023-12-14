@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { getApartImages, getApart, getAparts } from '../../api/apartsApi.js'
+import { getApartImages, getApart } from '../../api/apartsApi.js'
 import altPicture from '/src/assets/images/homeCards/home-1.png'
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import '../../assets/styles/pagesStyles/house.css'
 import ApartSlider from './ApartSlider';
 import { useParams } from 'react-router-dom';
@@ -45,10 +45,6 @@ export default function Apartament() {
         const apartData = await getApart(apartId)
         if (apartData) {
           setApart(apartData)
-        }
-        const apartsData = await getAparts()
-        if (apartsData) {
-          setAparts(apartsData)
         }
         const apartPics = await getApartImages(apartId)
         setApartPictures(apartPics)
@@ -203,7 +199,6 @@ export default function Apartament() {
         </p>
       </div>
       {/* изменить названия классов с apart на room */}
-      <Link to={`/reservation/apartment/${apart.id}`} className="apart__item-btn--right">Забронировать квартиру</Link>
       <div className="apart__list">
         <ul className="apart__list-items">
           {aparts.map((apart, index) => (
@@ -217,6 +212,7 @@ export default function Apartament() {
           ))}
         </ul>
       </div>
+      <a className='apart__item-btn--right' href="#">Забронировать</a>
       {/* <div className="apart">
         <h2 className="apart__items-title">
           НОМЕРА

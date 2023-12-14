@@ -1,14 +1,5 @@
 import axios from "axios";
 
-export const getAllRooms = async () => {
-  try {
-    const response = await axios.get(`http://localhost:3000/api/rooms`)
-    return response.data
-  } catch (e) {
-    console.error(e);
-  }
-}
-
 export const getRooms = async (houseId) => {
   try {
     const response = await axios.get(`http://localhost:3000/api/rooms/${houseId}`)

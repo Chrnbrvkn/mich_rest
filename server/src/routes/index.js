@@ -29,7 +29,6 @@ router.post('/aparts', upload.none(), apartController.createApart)
 router.patch('/aparts/:apartId', upload.none(), apartController.updateApart)
 router.delete('/aparts/:apartId', apartController.deleteApart)
 // rooms
-router.get('/rooms', roomController.getAllRooms)
 router.get('/rooms/:houseId', roomController.getRooms)
 router.get('/rooms/:houseId/:roomId', roomController.getOneRoom)
 router.post('/rooms/:houseId', upload.none(), roomController.createRoom)

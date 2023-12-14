@@ -122,7 +122,7 @@ export default function Houses() {
 //           </li>
 //         </ul>
 //         <div className="houses__items">
-//           {houses.map((itemdiv, index) => {
+//           {houses.map((item, index) => {
 //             return (
 //               <div key={index} className="house__item">
 //                 <h5 className="house__item-title house__item-title--min">

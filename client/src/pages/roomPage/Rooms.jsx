@@ -6,7 +6,7 @@ import faucet from '../../assets/images/room/room-icons/faucet.svg'
 import food from '../../assets/images/room/room-icons/food.svg'
 import { getRoomAllImages, getRoom, getRooms } from '../../api/roomsApi';
 import { getHouse } from '../../api/housesApi';
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import leftArrow from '../../assets/images/icons/houses-icons/arrow-left.svg'
@@ -68,6 +68,14 @@ export default function Rooms() {
     fetchData()
   }, []);
 
+  const handleRoomTitle = () => {
+    const roomTitle = rooms.find(r => r.id == roomId)
+    return roomTitle ? roomTitle.name : 'Комната'
+  }
+  // if(roomsPictures[current]){
+  // console.log(roomsPictures[current]);
+  // console.log(roomsPictures);
+  // }
   return (
     <div className='room'>
       <div className="container">
@@ -189,7 +197,9 @@ export default function Rooms() {
                 </div>
                 <div className='slider__house-photos'>
                 </div>
-                <Link to={`/reservation/room/${room.id}`} className="room__main-btn">Забронировать комнату</Link>
+                <button className="room__main-btn">
+                  Забронировать
+                </button>
               </div>
               <div className="room__main-right">
                 <div className="room__main-inform">

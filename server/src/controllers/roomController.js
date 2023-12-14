@@ -1,14 +1,7 @@
 const ApiError = require('../error/ApiError');
 const { Rooms } = require('../models/models')
 class RoomController {
-  async getAllRooms(req, res) {
-    try {
-      const allRooms = await Rooms.findAll()
-      return res.json(allRooms)
-    } catch (e) {
-      console.log(e);
-    }
-  }
+
   async getRooms(req, res) {
     try {
       const houseId = req.params.houseId

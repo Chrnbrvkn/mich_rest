@@ -24,7 +24,7 @@ export default function Aparts() {
     fetchData()
   }, [])
 
-  console.log(apartPictures);
+  console.log(aparts);
   const handleApartImage = (apartId) => {
     const picture = apartPictures.find(pic => pic.apartId = apartId)
     return picture ? `http://localhost:3000${picture.url}` : altPicture

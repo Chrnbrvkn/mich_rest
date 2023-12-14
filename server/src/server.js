@@ -10,10 +10,10 @@ const app = express()
 app.use('/public/uploads', express.static('public/uploads'));
 
 app.use(cors({
-  origin: 'http://localhost:5173'
+  origin: ['http://localhost:5173', 'http://gelenrest.ru']
 }))
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../../client/dist')));
 
 app.use(express.json())
 app.use('/api', router)
