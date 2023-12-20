@@ -50,7 +50,7 @@ export default function EditApart({ id, onEditSubmit }) {
   const renderExistingImage = () => {
     return existingPictures.map(picture => (
       <div key={picture.id}>
-        <img className="edit__image" src={'http://localhost:3000' + picture.url} />
+        <img className="edit__image" src={'http://45.80.69.128:3000' + picture.url} />
         <button onClick={() => handleDeleteImage(picture.id)}>Удалить</button>
       </div>
     ))
@@ -60,7 +60,7 @@ export default function EditApart({ id, onEditSubmit }) {
   };
   const handleImageChange = useCallback((e) => {
     const files = Array.from(e.target.files)
-    if(files){
+    if (files) {
       setPictures(files)
     }
   }, [])
@@ -73,7 +73,7 @@ export default function EditApart({ id, onEditSubmit }) {
       })
 
       await updateApart(id, newApartData)
-      if(pictures.length > 0){
+      if (pictures.length > 0) {
         await uploadApartPictures(pictures, id)
       }
       console.log(`${data.name} updated!`);

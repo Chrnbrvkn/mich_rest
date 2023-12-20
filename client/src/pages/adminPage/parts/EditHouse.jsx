@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { getHouse, updateHouse, getHouseImages, uploadHousePictures, deleteHousePicture } from "../../../api/housesApi";
-import { houseFields } from "../../../constants/formFields"; 
+import { houseFields } from "../../../constants/formFields";
 
 export default function EditHouse({ id, onEditSubmit }) {
   const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
@@ -49,7 +49,7 @@ export default function EditHouse({ id, onEditSubmit }) {
 
   const renderExistingImage = () => existingPictures.map(picture => (
     <div key={picture.id}>
-      <img className="edit__image" src={'http://localhost:3000' + picture.url} alt="House" />
+      <img className="edit__image" src={'http://45.80.69.128:3000' + picture.url} alt="House" />
       <button onClick={() => handleDeleteImage(picture.id)}>Удалить</button>
     </div>
   ));
@@ -92,7 +92,7 @@ export default function EditHouse({ id, onEditSubmit }) {
 
   return (
     <div className="houses_form-add">
-    
+
       <div>Изменить дом {houseName}</div>
       {renderExistingImage()}
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">

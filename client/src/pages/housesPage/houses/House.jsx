@@ -63,7 +63,7 @@ export default function House() {
     }
     fetchData()
   }, []);
-  
+
   house.services = [
     { name: 'Wi-Fi', icon: wifiIcon },
     { name: 'Фен', icon: hairdryerIcon },
@@ -94,7 +94,7 @@ export default function House() {
 
   const handleRoomImage = (roomId) => {
     const pic = roomsPictures.find((pic) => pic.roomId === roomId)
-    return pic ? `http://localhost:3000${pic.url}` : altPicture
+    return pic ? `http://45.80.69.128:3000${pic.url}` : altPicture
   }
 
   return (
@@ -255,8 +255,8 @@ export default function House() {
                     <p>Санузел</p>
                   </div>
                 </div>
-                {Array.from({ length: room.roomCount}, (_, index) => (
-                <div key={index} className="apart__item-man"><img src={humanIcon} alt="" /></div>
+                {Array.from({ length: room.roomCount }, (_, index) => (
+                  <div key={index} className="apart__item-man"><img src={humanIcon} alt="" /></div>
                 ))}
                 <div className="apart__item-buttons">
                   <NavLink to={`/houses/${houseId}/rooms/${room.id}`} className='apart__item-btn--left' >Подробнее</NavLink>
